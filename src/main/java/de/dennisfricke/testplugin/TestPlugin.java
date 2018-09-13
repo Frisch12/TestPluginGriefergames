@@ -12,11 +12,10 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import de.dennisfricke.testplugin.bungee.CheckPermissionListener;
 import de.dennisfricke.testplugin.bungee.SkinUpdateListener;
+import de.dennisfricke.testplugin.commands.SkinAddCommandExecutor;
+import de.dennisfricke.testplugin.commands.SkinSetCommandExecutor;
 import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.command.CommandSender;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.Messenger;
 import org.bukkit.plugin.messaging.PluginMessageRecipient;
@@ -88,7 +87,8 @@ public class TestPlugin extends JavaPlugin implements PlatformPlugin<CommandSend
     }
 
     private void registerCommands() {
-
+        getCommand("skin-add").setExecutor(new SkinAddCommandExecutor(this));
+        getCommand("skin-set").setExecutor(new SkinSetCommandExecutor(this));
     }
 
     public UserPreference getLoginSession(UUID id) {

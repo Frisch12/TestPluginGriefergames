@@ -206,18 +206,22 @@ public class SkinApplier extends SharedApplier {
         int dimensionId = receiver.getWorld().getEnvironment().getId();
         respawn.getIntegers().writeSafely(0, dimensionId);
 
-        //> 1.13
-        if (MinecraftVersion.getCurrentVersion().compareTo(MinecraftVersion.AQUATIC_UPDATE) > 0) {
-            try {
-                Class<?> dimensionManagerClass = MinecraftReflection.getMinecraftClass("DimensionManager");
+        try {
+            //> 1.13
+            if (MinecraftVersion.getCurrentVersion().compareTo(new MinecraftVersion("1.13")) > 0) {
+                try {
+                    Class<?> dimensionManagerClass = MinecraftReflection.getMinecraftClass("DimensionManager");
 
-                //find dimension manager
-                Method method = dimensionManagerClass.getDeclaredMethod("a", Integer.TYPE);
-                Object dimensionManger = method.invoke(null, dimensionId);
-                respawn.getSpecificModifier(dimensionManagerClass).withType(Object.class).write(0, dimensionManger);
-            } catch (ReflectiveOperationException reflectiveEx) {
-                throw new ReflectiveOperationException("Failed to find dimension manager", reflectiveEx);
+                    //find dimension manager
+                    Method method = dimensionManagerClass.getDeclaredMethod("a", Integer.TYPE);
+                    Object dimensionManger = method.invoke(null, dimensionId);
+                    respawn.getSpecificModifier(dimensionManagerClass).withType(Object.class).write(0, dimensionManger);
+                } catch (ReflectiveOperationException reflectiveEx) {
+                    throw new ReflectiveOperationException("Failed to find dimension manager", reflectiveEx);
+                }
             }
+        } catch (Exception ex) {
+            plugin.getLog().error("Exception occurred: ", ex);
         }
 
         respawn.getDifficulties().write(0, difficulty);

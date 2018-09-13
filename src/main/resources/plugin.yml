@@ -1,7 +1,10 @@
 name: TestPlugin
 main: de.dennisfricke.testplugin.TestPlugin
-version: ${version}
+version: 1.0.0
 commands:
-  pos:
-    description: Displays your position or teleports you to another.
-    usage: "Usage: '/pos' to get current position, or '/pos x y z' to teleport to x,y,z"
+    skin-add:
+        description: Add skin to selection menu.
+        usage: "Usage: /skin-add [onlinePlayer] to add a skin to selection"
+    skin-set:
+        description: Set skin to certain player.
+        usage: "Usage: /skin-set [offlinePlayer] [onlinePlayer]"
