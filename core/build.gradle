@@ -1,0 +1,9 @@
+apply plugin: 'java'
+
+dependencies {
+	compile 'com.google.code.gson:gson:2.2.4'
+	compile 'com.google.guava:guava:17.0'
+	compile 'com.zaxxer:HikariCP:3.0.0'
+	compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+	compile 'net.md-5:bungeecord-config:1.12-SNAPSHOT'
+}
